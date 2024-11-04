@@ -1,0 +1,48 @@
+<%= form_with(model: task, local: true) do |form| %>
+  <% if task.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:</h2>
+      <ul>
+        <% task.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :title, class: "form-label" %>
+    <%= form.text_field :title, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :description, class: "form-label" %>
+    <%= form.text_area :description, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :priority, class: "form-label" %>
+    <%= form.select :priority, options_for_select([['High', 'high'], ['Medium', 'medium'], ['Low', 'low']], task.priority), class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :due_date, class: "form-label" %>
+    <%= form.date_select :due_date, start_year: Date.today.year, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :completed, class: "form-check-label" %>
+    <%= form.check_box :completed, class: "form-check-input" %>
+  </div>
+
+  <div class="actions mt-3">
+    <%= form.submit class: "btn btn-primary" %>
+  </div>
+
+<div class="field">
+  <%= form.label :tags %>
+  <%= form.text_field :tags %>
+</div>
+
+
+<% end %>

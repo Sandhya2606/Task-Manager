@@ -1,0 +1,47 @@
+<h1 class="my-4">Tasks</h1>
+
+<%= link_to 'New Task', new_task_path, class: 'btn btn-primary' %>
+
+<!-- Search Form -->
+<%= form_with url: tasks_path, method: :get, local: true do %>
+  <div class="input-group my-3">
+    <%= text_field_tag :search, params[:search], placeholder: "Search tasks", class: "form-control" %>
+    <div class="input-group-append">
+      <%= submit_tag "Search", class: "btn btn-secondary" %>
+    </div>
+  </div>
+<% end %>
+
+
+<!-- Filter Options -->
+<div class="mb-3">
+  <%= link_to 'All', tasks_path, class: 'btn btn-link' %>
+  <%= link_to 'Completed', tasks_path(filter: 'completed'), class: 'btn btn-link' %>
+  <%= link_to 'Not Completed', tasks_path(filter: 'not_completed'), class: 'btn btn-link' %>
+</div>
+
+<!-- Line Chart for Tasks Created Over Time -->
+<div class="my-4">
+  <%= line_chart Task.group_by_day(:created_at).count, title: "Tasks Created Over Time" %>
+</div>
+
+<!-- Display Tasks in Bootstrap Cards -->
+<div class="row">
+  <% @tasks.each do |task| %>
+    <div class="col-md-4 my-2"> <!-- Adjust column size as needed -->
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title"><%= task.title %></h5>
+          <p class="card-text"><%= task.description %></p>
+          <p class="card-text">Priority: <%= task.priority ? task.priority.capitalize : 'Not set' %></p>
+          <small>Tags: <%= task.tags.present? ? task.tags.map(&:name).join(', ') : 'None' %></small>
+          <div class="mt-2">
+            <%= link_to 'Edit', edit_task_path(task), class: 'btn btn-warning btn-sm' %>
+            
+            <%= link_to 'Delete', task_path(task), method: :delete, data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'}, class: 'btn btn-danger btn-sm' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

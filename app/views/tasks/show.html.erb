@@ -1,0 +1,22 @@
+<p>
+  <strong>Title:</strong> <%= @task.title %>
+</p>
+
+<p>
+  <strong>Description:</strong> <%= @task.description %>
+</p>
+
+<p>
+  <strong>Status:</strong> <%= @task.completed ? '✔️' : '❌' %>
+</p>
+
+<p>
+  <strong>Priority:</strong> <%= @task.priority ? @task.priority.capitalize : 'Not set' %>
+</p>
+
+<p>
+  <strong>Due Date:</strong> <%= @task.due_date ? @task.due_date.strftime("%B %d, %Y") : 'No due date' %>
+</p>
+
+<%= link_to 'Edit', edit_task_path(@task), class: 'btn btn-warning' %> |
+<%= link_to 'Back', tasks_path, class: 'btn btn-secondary' %>
