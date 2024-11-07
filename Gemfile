@@ -65,7 +65,7 @@ group :test do
 end
 
 # gem "webpacker", "~> 5.4"
-gem "bootstrap", "~> 5.0.0"
+gem "bootstrap", "~> 5.3.3"
 gem "sassc-rails", "~> 2.1"
 
 gem "pry", "~> 0.14.2"
