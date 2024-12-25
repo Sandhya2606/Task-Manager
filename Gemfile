@@ -68,4 +68,4 @@ end
 gem "bootstrap", "~> 5.0.0"
 gem "sassc-rails", "~> 2.1"
 
-gem "pry", "~> 0.14.2"
+gem "pry", "~> 0.15.2"
